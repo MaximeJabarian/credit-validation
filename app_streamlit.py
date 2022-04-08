@@ -107,7 +107,7 @@ data_file = st.file_uploader("Veuillez télécharger un ficher CSV",type=["csv"]
 
 if data_file is not None:
 
-    df = pd.read_csv(data_file, sep=';')
+    df = pd.read_csv(data_file)
     df = df.set_index('Unnamed: 0')
     df_cols = df.columns
     clients_ids = df['SK_ID_CURR'].astype(int)
@@ -190,8 +190,9 @@ elif choice == "Profil Client" and data_file is not None:
         feature_choice = st.sidebar.selectbox("Features",features)
 
         ## Prédiction
-        models = ["RandomForest.pkl", "XGBOOST.pkl", "Regression_Logisitique.pkl"]
-        model_choice = st.sidebar.selectbox("Modèle",models)
+        # models = ["RandomForest.pkl", "XGBOOST.pkl", "Regression_Logisitique.pkl"]
+        # model_choice = st.sidebar.selectbox("Modèle",models)
+        model_choice = "RandomForest.pkl"
         model = pickle.load(open(model_choice, 'rb'))
         df_client = pd.DataFrame(df.loc[idx].values.reshape(1, len(df.columns)), columns=df.columns)
         results = classify_people(model, df_client, idx)
