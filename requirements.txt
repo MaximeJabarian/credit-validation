@@ -6,3 +6,4 @@ pandas
 flask
 plotly
 shap
+seaborn
